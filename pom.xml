@@ -39,6 +39,7 @@
             <version>${groovy.version}</version>
         </dependency>
     </dependencies>
+    <!--
     <distributionManagement>
         <repository>
             <id>lappsgrid-releases</id>
@@ -49,4 +50,5 @@
             <url>http://maven.lappsgrid.org/repository/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
+    -->
 </project>
