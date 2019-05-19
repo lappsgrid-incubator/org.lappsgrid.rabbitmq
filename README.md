@@ -2,7 +2,7 @@
 
 ### Build Status
 
-[![Master Status](http://grid.anc.org:9080/travis/svg/lapps/org.lappsgrid.rabbitmq?branch=master)](https://travis-ci.org/lappsgrid-incubator/org.lappsgrid.rabbitmq) [![Develop Status](http://grid.anc.org:9080/travis/svg/lappsgrid-incubator/org.lappsgrid.rabbitmq?branch=develop)](https://travis-ci.org/lappsgrid-incubator/org.lappsgrid.rabbitmq)
+[![Master Status](http://grid.anc.org:9080/travis/svg/lappsgrid-incubator/org.lappsgrid.rabbitmq?branch=master)](https://travis-ci.org/lappsgrid-incubator/org.lappsgrid.rabbitmq) [![Develop Status](http://grid.anc.org:9080/travis/svg/lappsgrid-incubator/org.lappsgrid.rabbitmq?branch=develop)](https://travis-ci.org/lappsgrid-incubator/org.lappsgrid.rabbitmq)
 
 ### Deployment
 
