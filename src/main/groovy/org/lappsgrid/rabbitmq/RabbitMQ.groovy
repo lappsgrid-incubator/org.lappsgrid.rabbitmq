@@ -39,7 +39,14 @@ class RabbitMQ {
 
     private void init(String queueName, String host, String username, String password) {
         ConnectionFactory factory = new ConnectionFactory()
+        String vhost = "/"
+        int slash = host.indexOf("/")
+        if (slash > 0) {
+            vhost = host.substring(slash + 1)
+            host = host.substring(0, slash)
+        }
         factory.setHost(host)
+        factory.setVirtualHost(vhost)
         factory.setUsername(username)
         factory.setPassword(password)
         connection = factory.newConnection()

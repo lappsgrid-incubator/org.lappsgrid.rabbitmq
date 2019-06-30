@@ -21,7 +21,7 @@ abstract class MessageBox extends RabbitMQ {
 
     MessageBox(String exchange, String address, String host) {
         super('', host)
-        channel.exchangeDeclare(exchange, "direct");
+        super.channel.exchangeDeclare(exchange, "direct");
         boolean passive = false
         boolean durable = true
         boolean exclusive = false

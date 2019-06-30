@@ -44,6 +44,7 @@ abstract class Worker extends DefaultConsumer {
         catch (Exception e) {
             // TODO Add proper logging.
             System.err.println("Error working on message: ${e.message}")
+            e.printStackTrace()
         }
 //            this.channel.basicAck(envelope.deliveryTag, false)
     }

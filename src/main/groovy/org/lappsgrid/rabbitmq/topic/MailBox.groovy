@@ -41,13 +41,13 @@ abstract class MailBox extends RabbitMQ {
                             AMQP.BasicProperties properties, byte[] body)
                 throws IOException {
             String message = new String(body, "UTF-8");
-            try {
+//            try {
                 box.recv(message)
                 channel.basicAck(envelope.deliveryTag, false)
-            }
-            catch (Exception e) {
-                e.printStackTrace()
-            }
+//            }
+//            catch (Exception e) {
+//                e.printStackTrace()
+//            }
         }
 
     }

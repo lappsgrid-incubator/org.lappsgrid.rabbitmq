@@ -1,7 +1,12 @@
 package org.lappsgrid.rabbitmq
 
 /**
+ * A convenience class for passing messages between processes using RabbitMQ.
  *
+ * The <code>command</code>, <code>body</code>, and <code>parameters</code> are
+ * application dependent and no restrictions are placed on their use or meaning.
+ * The <code>route</code> field is used by the framework to determine the next
+ * mailbox (RabbitMQ message queue) the message will be sent to.
  */
 class Message {
     String command
