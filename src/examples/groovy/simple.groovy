@@ -1,7 +1,7 @@
 @Grab('org.lappsgrid.eager.mining:rabbitmq:1.1.0')
 import org.lappsgrid.rabbitmq.Message
 import org.lappsgrid.eager.rabbitmq.topic.*
-import org.lappsgrid.rabbitmq.topic.MessageBox
+import org.lappsgrid.rabbitmq.topic.java.MessageBox
 import org.lappsgrid.rabbitmq.topic.PostOffice
 
 import java.util.concurrent.CountDownLatch

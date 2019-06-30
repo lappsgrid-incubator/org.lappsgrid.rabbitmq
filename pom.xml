@@ -15,7 +15,6 @@
     <name>Simple RabbitMQ</name>
     <description>Simple interface for RabbitMQ</description>
     <packaging>jar</packaging>
-
     <url>https://github.com/lappsgrid-incubator/org.lappsgrid.rabbitmq</url>
     <licenses>
         <license>

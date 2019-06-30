@@ -4,7 +4,7 @@ import org.lappsgrid.discriminator.Discriminators
 @Grab('org.lappsgrid.eager.mining:rabbitmq:1.1.0')
 import org.lappsgrid.rabbitmq.Message
 import org.lappsgrid.eager.rabbitmq.topic.*
-import org.lappsgrid.rabbitmq.topic.MessageBox
+import org.lappsgrid.rabbitmq.topic.java.MessageBox
 import org.lappsgrid.rabbitmq.topic.PostOffice
 @Grab('org.lappsgrid:serialization:2.6.0')
 import org.lappsgrid.serialization.Data
