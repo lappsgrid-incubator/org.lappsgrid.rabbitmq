@@ -6,6 +6,7 @@ import com.rabbitmq.client.Envelope
 //import org.lappsgrid.eager.mining.core.json.Serializer
 import org.lappsgrid.rabbitmq.Message
 import org.lappsgrid.rabbitmq.RabbitMQ
+
 import org.lappsgrid.serialization.Serializer
 
 /**
