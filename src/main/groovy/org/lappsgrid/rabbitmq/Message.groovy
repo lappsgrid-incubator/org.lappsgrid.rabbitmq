@@ -9,12 +9,14 @@ package org.lappsgrid.rabbitmq
  * mailbox (RabbitMQ message queue) the message will be sent to.
  */
 class Message {
+    String id
     String command
     Object body
     List<String> route
     Map<String,String> parameters
 
     Message() {
+        id = UUID.randomUUID().toString()
         command = ''
         route = []
         body = ''
@@ -34,7 +36,8 @@ class Message {
         this(command, body, [:], route)
     }
 
-    Message(String command, Object body, Map<String, String> paramters, List<String> route) {
+    Message(String command, Object body, Map<String, String> parameters, List<String> route) {
+        this.id = UUID.randomUUID().toString()
         this.command = command
         this.body = body
         this.route = route
