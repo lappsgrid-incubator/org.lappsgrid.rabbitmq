@@ -210,4 +210,4 @@ MailBox box = new MailBox('stanford', 'splitter') {
 
 # Example Distributed Pipeline
 
-There is an [example distributed pipeline](src/test/groovy/org/lappsgrid/eager/rabbitmq/example/README.md) in the [org.lappsgrid.eager.rabbitmq.example](src/test/groovy/org/lappsgrid/eager/rabbitmq/example) packae found in the `src/test/groovy` directory. The example implements a simple processing pipeline with several worker threads for each stage of pipeline the pipeline.
+There is an [example distributed pipeline](src/test/groovy/org/lappsgrid/eager/rabbitmq/example/README.md) in the [org.lappsgrid.eager.rabbitmq.example](src/test/groovy/org/lappsgrid/eager/rabbitmq/example) package found in the `src/test/groovy` directory. The example implements a simple processing pipeline with several worker threads for each stage of pipeline the pipeline.
