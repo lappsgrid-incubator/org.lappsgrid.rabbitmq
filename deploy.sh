@@ -28,4 +28,4 @@ openssl aes-256-cbc -d -pass pass:"$ENCRYPTION_PASSWORD" -in pubring.gpg.enc -ou
 mvn -DskipTests=true package groovydoc:generate source:jar deploy -Dgpg.passphrase="$PGP_PASSPHRASE" --settings settings.xml -Prelease,staging
 
 # 4. Build and deploy the Maven site to the gh_pages branch.
-mvn site --settings settings.xml
+#mvn site --settings settings.xml
