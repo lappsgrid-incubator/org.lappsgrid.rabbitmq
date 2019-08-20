@@ -1,8 +1,17 @@
 # RabbitMQ Module
 
+### Build Status
+
+[![Master Status](http://grid.anc.org:9080/travis/svg/lappsgrid-incubator/org.lappsgrid.rabbitmq?branch=master)](https://travis-ci.org/lappsgrid-incubator/org.lappsgrid.rabbitmq) [![Develop Status](http://grid.anc.org:9080/travis/svg/lappsgrid-incubator/org.lappsgrid.rabbitmq?branch=develop)](https://travis-ci.org/lappsgrid-incubator/org.lappsgrid.rabbitmq)
+
+### Deployment
+
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.lappsgrid/rabbitmq/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/org.lappsgrid/rabbitmq)
+
+
 [RabbitMQ](https://www.rabbitmq.com) is a lightweight, easy to use, open source message broker that can be used to send messages between processes even when those processes are running in different JVMs, on different machines, or possibly even in different json-centers.  Above all, RabbitMQ is dead simple to get up and running and start using. Zero configuration is required to create exchanges and message queues, they will be created and destroyed automatically on demand by the RabbitMQ server.
 
-The `org.lappsgrid.eager.mining.rabbitmq` module provides a simplified API for a subset of the RabbitMQ features.  Namely:
+The `org.lappsgrid.rabbitmq` module provides a simplified API for a subset of the RabbitMQ features.  Namely:
 
 1. **Task Queues**<br/>messages are distributed to subscribed workers using a fair round robin algorithm.
 1. **Publish/Subscribe**<br/>broadcasters send messages to all subscribed listeners.
@@ -201,4 +210,4 @@ MailBox box = new MailBox('stanford', 'splitter') {
 
 # Example Distributed Pipeline
 
-There is an [example distributed pipeline](src/test/groovy/org/lappsgrid/eager/rabbitmq/example/README.md) in the [org.lappsgrid.eager.rabbitmq.example](src/test/groovy/org/lappsgrid/eager/rabbitmq/example) packae found in the `src/test/groovy` directory. The example implements a simple processing pipeline with several worker threads for each stage of pipeline the pipeline.
+There is an [example distributed pipeline](src/test/groovy/org/lappsgrid/eager/rabbitmq/example/README.md) in the [org.lappsgrid.eager.rabbitmq.example](src/test/groovy/org/lappsgrid/eager/rabbitmq/example) package found in the `src/test/groovy` directory. The example implements a simple processing pipeline with several worker threads for each stage of pipeline the pipeline.

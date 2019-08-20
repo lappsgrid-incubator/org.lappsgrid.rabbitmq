@@ -1,11 +1,39 @@
-language: java
+language: groovy
+jdk:
+- openjdk8
 branches:
   only:
-  - master
   - develop
-before_install:
-- chmod a+x ./deploy.sh
-script:
-- mvn clean test --settings settings.xml
-after_success:
-- if [ "$TRAVIS_BRANCH" == "master" ] ; then ./deploy.sh ; fi
+  - master
+  - "/release.*/"
+env:
+  global:
+  - secure: pza0uhBB8YcruW0ol8bQL61+oLBIG6HBSYJwMmN58VINstyPJKAkGB90RRHSxxSkg+R0gtV26izvRsx8nAeYceHAiQTLNcyshXYOsoUMUfpjqDTq+VSCgsAgPlFpIyXXa3AmUFazHqHj32pvkRohTUv7FB0tDrDgRCVvfKnTQdj86Yg0zcc4KQ/nokqK4kJZT3eQ9IQ2ImQjt55IEAgOLR7PZIbwj7l2vVjR8ZGlV7A5cgpcQt+7x+imWoSZyvPQ3HXWwzxyt9TSJ/+Dej84cgKFmaF0wA0GjNUx/ED92g+ypGClDT8TQ+ijSJ4E+oJnhI/HG87ktQEdKsOCawibEqkMKUEwtj7rYQXXewQ0Dd1ph3Y91tlVwwVClxnA7zzNFPLwahXBPCEMfrScXlxOck5YiBio2XZILuxhvAD0f/pt/C5hL3EMkvcUXvjZLq1KWEWZEgLgnhIDXJLFdVFuZC8tstcj4qjkxktUSQcRNmNR0CaN3QGrl1NfmkAQ/+M7Q/SxB/EF710TOcJMOaNts7r7e87rjrhBL3cr9/jG26ECOCCduO2BXH4w6PPDViGNrCCJKv7ZjkcXmG2dZ+3xUFi5LgWqi2g3nyVfeCk32butakZdjzO8I7LnYGdGIsUp3Et0KMwdesNY223BBnYwt0DMiDLoEatNh22CgQ72z5w=
+  - secure: d4aVLgTAJE6drvdM7vooUW2BsyTC1zYnwT00R+twFG4K60PGhI92Jo8ZqlsU0rEaVdgsBj14vgm4NTlEBVL7fjOQJNRYsBNy3ws9grAsvn5QsPtyR5xBYCEBkYeLcwEOkUtbr0/59H5ekBq+VK3QGeq9tuj4cg+CFGrwgW6MQEGtmNh5p8GLTRgQCHy8mMp/2tb5c95YZys0hnW4VlgQIVj77VToZH/iySV0rV0XQzU1OTolyT5SZ1kfhR3LPKacEuVsEQGLfIMgpgCCOBy8u3oSe5tJgcDshTH3SRKJ43+vOMsr57UNejigw8ONuzywG097nagTifhiJPaAsTjrkEyvxXhOWReKbIv0/M8ubfQWBarC1hN6zLBMgWEaQmrXWhbDA5rBsZEgWQ9UUKdKjKVY5gC2omx+FTW8msSgJFhzW52FdtAovzFWknfcgH+sFIchWmwq6Ga+FZBtD8gZSPUu8CgC0CI/5oNG9LpRAL2YBdc/PwrWWnmRw8PEHURxxsDOS9Z6sQMedFaBG7VXVVxuups9wrttWWJ+eYZw6k+LtwomLu5Q5L0FLxTjXD2XMsGazvwECy2ddQz4i2Ad99PCysr+hhWkW54gxxkpj7B+nGsKvyp0KCQIzV2izQEbC2tLE7iAtruRCgK9uJRYOt7P5y/fLIyGCHN0TfX/BbY=
+  - secure: BtjZ6mAfdgeCvlUoGr4xNKPvFgSdPFh5kcfqipVnUtryHHZzrZiBTYbIpGPuLOplx2OFnvyKwpNLl5AGBn62A/1QkaKe7Fyr8yPhk1zeU7IJcKueBSTTr4uicdTnRgE51K3vZ5gZu89w28ycfZP50ByFSJIJJVtLkrlx9V7pdbkZ5v4AA9TS5e1VLaDWGSSJ+cmKWta3yeuh+C0G3CuhDG5SvQeCgGVIOkONijrqYpDYW3THSPomEWVgPK8hFTqAnbXMFnd/ZAiBzb1TQFW/26XVjYKfOI4dbNHE/aKkw3ezVF8sGsVVJ5hH5rjaVxBPWrDLopfgJWeqf/AxqYAmkcbEMIE2U9ApXaDoIlK3t1kNdZswXI6B4a03r8iWplFLWxuVuay6DJtfhQW65k7NE2iEhXW7OtdJf8Dv+cCoavhrvBsNXL9qRxtMds8CzVeb0CXUw2t0ARRJuofVl8edCpUyyUzviJXHRvWZNRhu/KMH8JiQK61FSbbbzFPveE4kHWKdQJ8PoKBwshgoknJS5Tr7d7WaMD+mwWxntfl6CHbCZssVTgJkDQrceFoKjY/jo3kcitX+lSpsxvBOeD7UVu3I6FNn3f1bDq1JNdIv8igtmQexCshrQxsQL8moXbK35JhshP63TqtWhdy/cW8Q0dwIH2etbioixsFv/F3/KWE=
+  - secure: s4SySCiC9I0/xjXLMpsvIdvwy0K7bEA/vSg8T6ewk9BBxFvavJOKruHDRizDoidbnH04ufkXF2ZIGoHY/rjqdqJG2DSQi+YmCF4rNPR+/h0XIslUMwLhU6LgPXohZ15Z/UdSZGaoNmP9rSyqHcdWtCnScwYEpPVsLsy3kEyQ+ujz8PCxKU6jAYqUPMOrmTLRkIW5mV7VN4gp1JL/m7xy09k+CPNMzWRGxpBjgqBcIIw9gyeFEJgm3Djq3tT5FfLsFC4iWX8fl9cAHH2wZ+z2mV1th8JcPvDEWew4u4bctQgXZnLBhVYv89b2BW97yyewHJitlF6kZhs5Lgx3FHwjF4tte6PMbJ+q5fYJYPKd7IZfPF9GN56GOUWDLFzCGeorTpIdeg9lWBpM7IGGw891bHvV+CavHGGn1Wmp5ux2BeG9BC6A6XKj8MYABgVjGhl7mlYkfwBl1qIrfA3ZNSKLvIE62qp1AVtyYOBCFG+c/cZx4zVhJ7k1cYywKAOtyczhJ8kk9oDk6mpSuBeWJyxqyrHpM4Xl5ujUhRx+/PDcHL2JhOyFxtNsrYo3zMmjV5viTQP159/iCikXZOv0xlpsAfz24KgwrgPFlhnSA6EKEQ0JS1nRb8CbFESaqq6Ba4T4Ix6Flj7WkwjFC9bZq5dDqd6be/KcSuivkn2b4nTEQB8=
+  - secure: VkSpWyp2R9EjFUHolqNuTGnoHnPLo/9eiZbNtGJ5VaXd20O/epeT0lvYHZm19vbFO8gjrz/b6NNc9yMoBHlCHn0priP1tZqaZQADqYPLSonkyGnBIunEs9pVTeyjA65+gskEY0lda/+GMB/3zmf0eupFVptqzo+HdI4IrQ5kAxqv8lyVN1v54mi+F2wifTUC2p8SLa7/ZEIRHWj2QZ6B1E6dnuNxBEpwgd1f0ypIka+UATzi7nsDRYzIU7BvoMSlLaKL0OUXhFLREzsRXyRG3/UwR35qSOig0oqU7IxWeEdjzKkpsitBFDNhZwfiRnOSlLeFuxokPcJpLSCmeMl08kTTyUubbzXvx4B3Ow637bq59m6pgiccuTfiZhxvOXTAp73V4umCtTI5YnlusO/aPS0741X7i1c8wRIuM5YS5v5vLU3sfAHAx8rEYpSXlkDwD99U9IR7w5ic7xP27TTtXZOKHl8ap0IIgzykkUeZKN3TS1ff9+8NJtCOfD3dEz/g1KCKw8Aiit1199Cwa30ILgEP9PRADKBh3wNBbOSNvFpNtPqmy6I/JPcY2GwAU1Ch6XekLtTelFdX1FOCh0zNYVbqMPozGDgcyz4wk5X44ZZsGg9aVFQoy1YmZtNazswbAm3uBeCBDh7o5RwcZ5voUe6rILPxAusuoFR6EL+b8+0=
+  - secure: A5F7JNOd0MPtFZnq0RjkuNIL07fQywCqccSUzFVSobmiQ3WHIukaOLQ0fE5wO3Aq5iZGE2VElXCviUqwYd1wmsRzMztXTr8/APm6LL3pfdibCTG0mWRYl6CCZLqSD1xgLo7VZsPs5sPoZV0kDi2q0B9Bjy0m6qeToLBr62RPiHB+29NY4Hy2m/I9IO8N7UZvLQgiGxwvv2rGAPUBLHTWDxvz6oEjkKmbr/DsJpvM7HZVynURG6zdfCxpH2/SoM0mTevaxSKr1ziuup7aCUediZbnXGHz1O9/nwf9pET2/vCQuZI/XLdorAYW1kRUSkRH0XKeQdCwzOuFN24i1Wqje1bjRw7s996ZMAz6zhUfcXItlovuh+jSPSy1kpMJ16L0NEf4fsF5Gs/8VCmcXauDwcOIs60bpIAoO+MshEJyv7/t1d+HtE1Wo8Nykmwrj2i/eGSQgea3BUNtWhUcUsEJTBjoAitArgrk8c74i8P1el2FQCSaliMj3PIxjzt2kcS0t65g6qs5ZEVKWyprba9BZzXuBYwmkHtkeh46sztppBWxoB2woFxfSO3ueudbpH/chC3ze+9TLiWAc7PaUQO7tNyf6vMQLx274pHNMrIXKKwbkZCDXcZvPKs/148IxNETSje3UWmi/UWOp/z82WPGs69QtsGKHE1/0wQAyMahwx8=
+stages:
+- name: Unit Tests
+  if: branch = develop
+- name: Staging
+  if: branch =~ ^release
+- name: Master
+  if: branch = master
+jobs:
+  include:
+  - stage: Unit Tests
+    install: mvn --settings settings.xml -DskipTests=true -Dmaven.javadoc.skip=true
+      -Pdevelop -B -V install
+    script: mvn --settings settings.xml -Pdevelop clean test
+  - stage: Staging
+    install: mvn --settings settings.xml -DskipTests=true -Dmaven.javadoc.skip=true
+      -Pstaging -B -V install
+    script: mvn --settings settings.xml -Dmaven.javadoc.skip=true -Pstaging -B -V
+      clean test
+    after_success: chmod +x deploy.sh && ./deploy.sh
+  - stage: Master
+    install: mvn --settings settings.xml -DskipTests=true -Dmaven.javadoc.skip=true
+      -B -V install
+    script: mvn --settings settings.xml clean test
