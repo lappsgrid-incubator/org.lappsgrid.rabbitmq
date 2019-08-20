@@ -1,4 +1,7 @@
 language: groovy
+jdk:
+  - openjdk8
+  - oraclejdk8
 branches:
   only:
     - develop
@@ -20,12 +23,12 @@ jobs:
         -Pdevelop -B -V install
       script: mvn --settings settings.xml -Pdevelop clean test
     - stage: Staging
-      before-install: chmod +x ./deploy.sh
+      before-install: chmod +x deploy.sh
       install: mvn --settings settings.xml -DskipTests=true -Dmaven.javadoc.skip=true
         -Pstaging -B -V install
       script: mvn --settings settings.xml -Dmaven.javadoc.skip=true -Pstaging -B -V
         clean test
-      after_success: chmod +x deploy.sh && ./deploy.sh
+      after_success: ./deploy.sh
     - stage: Master
       install: mvn --settings settings.xml -DskipTests=true -Dmaven.javadoc.skip=true
         -B -V install
