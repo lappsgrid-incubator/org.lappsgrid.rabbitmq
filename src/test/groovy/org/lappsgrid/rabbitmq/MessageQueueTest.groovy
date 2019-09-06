@@ -13,9 +13,22 @@ class MessageQueueTest {
 
     TaskQueue queue
 
+    @BeforeClass
+    static void init() {
+        System.setProperty(RabbitMQ.USERNAME_PROPERTY, "guest")
+        System.setProperty(RabbitMQ.PASSWORD_PROPERTY, "guest")
+//        Process proc = "docker -d -p 5672:5672 --hostname test-rabbit --name test-rabbit rabbitmq:3".execute()
+//        sleep(1000)
+    }
+
+//    @AfterClass
+//    static void shutdown() {
+//        "docker rm -f test-rabbit".execute()
+//    }
+
     @Before
     void setup() {
-        queue = new TaskQueue('test.queue')
+        queue = new TaskQueue('test.queue', 'localhost')
     }
 
     @After
