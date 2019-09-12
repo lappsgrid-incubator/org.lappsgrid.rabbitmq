@@ -62,32 +62,30 @@ class PublisherTest {
         // Used to count the total number of messages received.
         CountDownLatch latch = new CountDownLatch(n * m)
         // Used to wait for the subscriber threads to start.
-        CountDownLatch ready = new CountDownLatch(n)
+//        CountDownLatch ready = new CountDownLatch(n)
         List<Subscriber> subscribers = []
         // Start three subscribers.
         n.times { i ->
-            Thread.start {
-                println "Starting subscriber $i"
-                Subscriber subscriber = new Subscriber(exchange)
-                subscribers.add(subscriber)
-                subscriber.register { msg ->
-                    latch.countDown()
-                    println "Listener $i -> $msg"
-                }
-                ready.countDown()
+            println "Starting subscriber $i"
+            Subscriber subscriber = new Subscriber(exchange)
+            subscribers.add(subscriber)
+            subscriber.register { msg ->
+                println "Listener $i -> $msg"
+                latch.countDown()
             }
-
+//            ready.countDown()
         }
 
         // Wait for the above threads to finish starting before starting the publisher.
-        boolean readyWait = ready.await(5, TimeUnit.SECONDS)
-        if (!readyWait) {
-            fail "There was a problem starting the subscribers."
-        }
+//        boolean readyWait = ready.await(5, TimeUnit.SECONDS)
+//        if (!readyWait) {
+//            fail "There was a problem starting the subscribers."
+//        }
 
         // Broadcast five messages.
         Publisher broadcaster = new Publisher(exchange)
         m.times { i ->
+            println "Broadcasting message $i"
             broadcaster.publish("$i PublisherTest#closure()")
             sleep(100)
         }

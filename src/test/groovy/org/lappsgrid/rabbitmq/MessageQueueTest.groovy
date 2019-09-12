@@ -27,15 +27,14 @@ class MessageQueueTest {
     @Test
     void simple() {
         int n = 0
-//        TaskQueue q = new TaskQueue('test.queue')
         queue.register { String message ->
             println "Received: $message"
             ++n
         }
-
-        queue.send('hello world')
-        sleep(500)
-        assert 1 == n
+        queue.send("1. hello world")
+        queue.send("2. hello world")
+        sleep(1000)
+        assert 2 == n
     }
 
     @Test
