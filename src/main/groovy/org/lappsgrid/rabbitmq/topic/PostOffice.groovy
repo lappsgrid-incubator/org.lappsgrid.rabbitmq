@@ -2,9 +2,9 @@ package org.lappsgrid.rabbitmq.topic
 
 
 import com.rabbitmq.client.MessageProperties
-import groovy.json.JsonOutput
 import org.lappsgrid.rabbitmq.Message
 import org.lappsgrid.rabbitmq.RabbitMQ
+import org.lappsgrid.serialization.Serializer
 
 /**
  *
@@ -28,7 +28,7 @@ class PostOffice extends RabbitMQ {
             return
         }
         String address = message.route.remove(0)
-        String json = JsonOutput.toJson(message)
+        String json = Serializer.toJson(message) //JsonOutput.toJson(message)
         send(address, json)
     }
 
