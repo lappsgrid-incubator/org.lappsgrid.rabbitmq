@@ -8,10 +8,10 @@ import org.lappsgrid.rabbitmq.SimpleConsumer
 /**
  *
  */
-class TaskQueue extends RabbitMQ{
+class TaskQueue extends RabbitMQ {
 
     public TaskQueue(String name) {
-        this(name, RabbitMQ.DEFAULT_HOST , true, true)
+        this(name, RabbitMQ.getHost() , true, true)
     }
 
     public TaskQueue(String name, String host) {

@@ -61,7 +61,22 @@ public class RabbitMQ {
         this.queueName = queueName;
     }
 
-    private String get(String key) {
+    private String get(String name) {
+        return RabbitMQ.getProperty(name, "rabbit");
+    }
+
+    public static String getHost() {
+        return getProperty("RABBIT_HOST", DEFAULT_HOST);
+    }
+
+    public static String getUsername() {
+        return getProperty("RABBIT_USERNAME", "rabbit");
+    }
+    public static String getPassword() {
+        return getProperty("RABBIT_PASSWORD", "rabbit");
+    }
+
+    static String getProperty(String key, String defaultValue) {
         String value = System.getProperty(key);
         if (value != null) {
             return value;
@@ -70,7 +85,7 @@ public class RabbitMQ {
         if (value != null) {
             return value;
         }
-        return "eager";
+        return defaultValue;
     }
     /*
     void register(Consumer consumer) {

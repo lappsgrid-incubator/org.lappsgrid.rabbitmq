@@ -16,7 +16,7 @@ abstract class MessageBox extends RabbitMQ {
     String exchange
 
     MessageBox(String exchange, String address) {
-        this(exchange, address, RabbitMQ.DEFAULT_HOST)
+        this(exchange, address, RabbitMQ.getHost())
     }
 
     MessageBox(String exchange, String address, String host) {

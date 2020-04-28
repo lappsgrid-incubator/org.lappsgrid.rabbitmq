@@ -13,9 +13,21 @@ class MessageQueueTest {
 
     TaskQueue queue
 
+    @BeforeClass
+    public static void before() {
+        new File("/etc/lapps/askme-dev.ini").eachLine { String line ->
+            if (!line.startsWith("#") && line.length() > 3) {
+                String[] tokens = line.split('=')
+                if (tokens.length == 2) {
+                    System.setProperty(tokens[0], tokens[1])
+                }
+            }
+        }
+    }
+
     @Before
     void setup() {
-        queue = new TaskQueue('test.queue')
+        queue = new TaskQueue('test.queue',"rabbitmq.lappsgrid.org/dev")
     }
 
     @After

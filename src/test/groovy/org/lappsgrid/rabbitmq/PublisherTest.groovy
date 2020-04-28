@@ -1,6 +1,7 @@
 package org.lappsgrid.rabbitmq
 
 import com.rabbitmq.client.Consumer
+import org.junit.BeforeClass
 import org.junit.Test
 import org.lappsgrid.rabbitmq.pubsub.Publisher
 import org.lappsgrid.rabbitmq.pubsub.Subscriber
@@ -16,6 +17,19 @@ import static org.junit.Assert.*
  */
 class PublisherTest {
     static final String exchange = 'test.broadcast'
+
+    @BeforeClass
+    public static void before() {
+        new File("/etc/lapps/askme-dev.ini").eachLine { String line ->
+            if (!line.startsWith("#") && line.length() > 3) {
+                String[] tokens = line.split('=')
+                if (tokens.length == 2) {
+                    System.setProperty(tokens[0], tokens[1])
+                }
+            }
+        }
+    }
+
 
     @Test
     void simple() {

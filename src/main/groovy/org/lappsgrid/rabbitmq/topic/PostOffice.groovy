@@ -13,7 +13,7 @@ class PostOffice extends RabbitMQ {
     String exchange
 
     PostOffice(String exchange) {
-        this(exchange, RabbitMQ.DEFAULT_HOST)
+        this(exchange, RabbitMQ.getHost())
     }
 
     PostOffice(String exchange, String host) {
@@ -33,8 +33,6 @@ class PostOffice extends RabbitMQ {
     }
 
     void send(String address, String message) {
-//        println "Sending ${message.bytes.length} bytes to $address"
-//        channel.basicPublis,h(exchange, address, MessageProperties.PERSISTENT_TEXT_PLAIN, message.bytes)
         send(address, message.bytes)
     }
 
