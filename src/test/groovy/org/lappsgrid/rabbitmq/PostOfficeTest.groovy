@@ -12,11 +12,14 @@ class PostOfficeTest {
 
     @BeforeClass
     public static void before() {
-        new File("/etc/lapps/askme-dev.ini").eachLine { String line ->
-            if (!line.startsWith("#") && line.length() > 3) {
-                String[] tokens = line.split('=')
-                if (tokens.length == 2) {
-                    System.setProperty(tokens[0], tokens[1])
+        File ini = new File("/etc/lapps/askme-dev.ini")
+        if (ini.exists()) {
+            ini.eachLine { String line ->
+                if (!line.startsWith("#") && line.length() > 3) {
+                    String[] tokens = line.split('=')
+                    if (tokens.length == 2) {
+                        System.setProperty(tokens[0], tokens[1])
+                    }
                 }
             }
         }
