@@ -9,7 +9,6 @@ import org.lappsgrid.rabbitmq.topic.PostOffice
 /**
  *
  */
-@Ignore
 class PostOfficeTest {
 
     @BeforeClass

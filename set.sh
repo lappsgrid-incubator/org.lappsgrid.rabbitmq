@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-echo $1
-echo ${!1}
+key=$1
+if [[ -n "$2" ]] ; then
+	value=$2
+else
+	value=${!1}
+fi
 
-travis encrypt -r lappsgrid-incubator/org.lappsgrid.rabbitmq $1=${!1} --add
-
+travis encrypt -r lappsgrid-incubator/org.lappsgrid.rabbitmq $key=$value --add
