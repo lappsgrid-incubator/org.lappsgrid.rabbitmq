@@ -12,7 +12,7 @@ services:
 addons:
   apt:
     packages:
-      - rabbitmq=server
+      - rabbitmq-server
 env:
   global:
   - RABBIT_USERNAME: guest
