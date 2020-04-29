@@ -1,6 +1,7 @@
 package org.lappsgrid.rabbitmq
 
 import org.junit.BeforeClass
+import org.junit.Ignore
 import org.junit.Test
 import org.lappsgrid.rabbitmq.topic.MailBox
 import org.lappsgrid.rabbitmq.topic.PostOffice
@@ -8,6 +9,7 @@ import org.lappsgrid.rabbitmq.topic.PostOffice
 /**
  *
  */
+@Ignore
 class PostOfficeTest {
 
     @BeforeClass

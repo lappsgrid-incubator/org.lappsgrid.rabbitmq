@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger
 /**
  *
  */
+@Ignore
 class MessageQueueTest {
 
     TaskQueue queue
