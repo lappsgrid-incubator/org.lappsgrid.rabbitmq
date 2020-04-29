@@ -1,3 +1,10 @@
+dist: xenial
+addons:
+  apt:
+    packages:
+      - rabbitmq-server
+services:
+  - rabbitmq
 language: groovy
 sudo: true
 jdk:
@@ -7,12 +14,6 @@ branches:
   - develop
   - master
   - "/release.*/"
-services:
-  - rabbitmq
-addons:
-  apt:
-    packages:
-      - rabbitmq-server
 env:
   global:
   - RABBIT_USERNAME: guest
