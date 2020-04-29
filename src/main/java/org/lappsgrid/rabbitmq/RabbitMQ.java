@@ -79,12 +79,15 @@ public class RabbitMQ {
     static String getProperty(String key, String defaultValue) {
         String value = System.getProperty(key);
         if (value != null) {
+            System.out.println("Found system property for " + key);
             return value;
         }
         value = System.getenv(key);
         if (value != null) {
+            System.out.println("Found environment variable for " + key);
             return value;
         }
+        System.out.println("Using default value for " + key);
         return defaultValue;
     }
     /*
