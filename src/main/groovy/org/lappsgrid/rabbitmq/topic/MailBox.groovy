@@ -12,7 +12,7 @@ abstract class MailBox extends RabbitMQ {
     String exchange
 
     MailBox(String exchange, String address) {
-        this(exchange, address, RabbitMQ.DEFAULT_HOST)
+        this(exchange, address, RabbitMQ.getHost())
     }
 
     MailBox(String exchange, String address, String host) {

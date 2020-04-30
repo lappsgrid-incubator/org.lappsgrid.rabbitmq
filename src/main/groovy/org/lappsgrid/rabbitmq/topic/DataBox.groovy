@@ -12,7 +12,7 @@ abstract class DataBox extends RabbitMQ {
     String exchange
 
     DataBox(String exchange, String address) {
-        this(exchange, address, RabbitMQ.DEFAULT_HOST)
+        this(exchange, address, RabbitMQ.getHost())
     }
 
     DataBox(String exchange, String address, String host) {

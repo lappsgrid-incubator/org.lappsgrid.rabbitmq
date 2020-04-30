@@ -9,13 +9,29 @@ import java.util.concurrent.atomic.AtomicInteger
 /**
  *
  */
+@Ignore
 class MessageQueueTest {
 
     TaskQueue queue
 
+    @BeforeClass
+    public static void before() {
+        File ini = new File("/etc/lapps/askme-dev.ini")
+        if (ini.exists()) {
+            ini.eachLine { String line ->
+                if (!line.startsWith("#") && line.length() > 3) {
+                    String[] tokens = line.split('=')
+                    if (tokens.length == 2) {
+                        System.setProperty(tokens[0], tokens[1])
+                    }
+                }
+            }
+        }
+    }
+
     @Before
     void setup() {
-        queue = new TaskQueue('test.queue')
+        queue = new TaskQueue('test.queue',"rabbitmq.lappsgrid.org/dev")
     }
 
     @After

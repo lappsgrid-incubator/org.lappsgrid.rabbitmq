@@ -1,5 +1,7 @@
 package org.lappsgrid.rabbitmq
 
+import org.junit.BeforeClass
+import org.junit.Ignore
 import org.junit.Test
 import org.lappsgrid.rabbitmq.topic.MailBox
 import org.lappsgrid.rabbitmq.topic.PostOffice
@@ -7,10 +9,27 @@ import org.lappsgrid.rabbitmq.topic.PostOffice
 /**
  *
  */
+@Ignore
 class PostOfficeTest {
+
+    @BeforeClass
+    public static void before() {
+        File ini = new File("/etc/lapps/askme-dev.ini")
+        if (ini.exists()) {
+            ini.eachLine { String line ->
+                if (!line.startsWith("#") && line.length() > 3) {
+                    String[] tokens = line.split('=')
+                    if (tokens.length == 2) {
+                        System.setProperty(tokens[0], tokens[1])
+                    }
+                }
+            }
+        }
+    }
 
     @Test
     void sendMail() {
+        println "Host is ${RabbitMQ.host}"
         int c1 = 0
         int c2 = 0
         MailBox box1 = new MailBox('test.postoffice', 'box1') {

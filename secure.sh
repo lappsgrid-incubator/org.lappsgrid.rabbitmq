@@ -12,7 +12,7 @@ function encrypt() {
 	name=$1
 	eval value=\$$name
 	echo "Encrypting $name=$value"
-	travis encrypt -r $REPO $name=\"$value\" --add
+	travis encrypt -r $REPO $name=\"$value\" --add -i
 }
 
 echo "Encoding keys for the repository $REPO"

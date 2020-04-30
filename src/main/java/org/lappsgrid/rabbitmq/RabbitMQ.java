@@ -34,8 +34,8 @@ public class RabbitMQ {
     public RabbitMQ(String queueName, String host) throws IOException, TimeoutException
     {
         String username = get(USERNAME_PROPERTY);
-        String passord = get(PASSWORD_PROPERTY);
-        init(queueName, host, username, passord);
+        String password = get(PASSWORD_PROPERTY);
+        init(queueName, host, username, password);
     }
 
     public RabbitMQ(String queueName, String host, String username, String password) throws IOException, TimeoutException
@@ -61,16 +61,34 @@ public class RabbitMQ {
         this.queueName = queueName;
     }
 
-    private String get(String key) {
+    private String get(String name) {
+        return RabbitMQ.getProperty(name, "rabbit");
+    }
+
+    public static String getHost() {
+        return getProperty("RABBIT_HOST", DEFAULT_HOST);
+    }
+
+    public static String getUsername() {
+        return getProperty("RABBIT_USERNAME", "rabbit");
+    }
+    public static String getPassword() {
+        return getProperty("RABBIT_PASSWORD", "rabbit");
+    }
+
+    static String getProperty(String key, String defaultValue) {
         String value = System.getProperty(key);
         if (value != null) {
+            System.out.println("Found system property for " + key);
             return value;
         }
         value = System.getenv(key);
         if (value != null) {
+            System.out.println("Found environment variable for " + key);
             return value;
         }
-        return "eager";
+        System.out.println("Using default value for " + key);
+        return defaultValue;
     }
     /*
     void register(Consumer consumer) {
