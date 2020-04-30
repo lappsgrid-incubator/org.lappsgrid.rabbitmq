@@ -15,7 +15,7 @@ abstract class Worker extends DefaultConsumer {
     protected boolean autoclose = false
 
     Worker(String name) {
-        this(new TaskQueue(name, RabbitMQ.DEFAULT_HOST))
+        this(new TaskQueue(name, RabbitMQ.getHost()))
         autoclose = true
     }
     Worker(String name, String host) {

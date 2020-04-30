@@ -4,7 +4,7 @@ import com.rabbitmq.client.AMQP
 import com.rabbitmq.client.Consumer
 import com.rabbitmq.client.DefaultConsumer
 import com.rabbitmq.client.Envelope
-import org.junit.Ignore
+import org.junit.BeforeClass
 import org.junit.Test
 import org.lappsgrid.rabbitmq.pubsub.Broadcaster
 import org.lappsgrid.rabbitmq.pubsub.Listener
@@ -14,9 +14,30 @@ import java.util.concurrent.atomic.AtomicInteger
 /**
  *
  */
-@Ignore
+//@Ignore
 class BroadcastTest {
     public static final String exchange = 'test.public.broadcast'
+
+    @BeforeClass
+    public static void before() {
+//        File ini = new File("/etc/lapps/askme-dev.ini")
+//        if (ini.exists()) {
+//            ini.eachLine { String line ->
+//                if (!line.startsWith("#") && line.length() > 3) {
+//                    String[] tokens = line.split('=')
+//                    if (tokens.length == 2) {
+//                        System.setProperty(tokens[0], tokens[1])
+//                    }
+//                }
+//            }
+//        }
+        System.setProperty("RABBIT_HOST", "localhost")
+        System.setProperty("RABBIT_USERNAME", "guest")
+        System.setProperty("RABBIT_PASSWORD", "guest")
+        System.setProperty("RABBIT_EXCHANGE", "askme_dev")
+
+    }
+
 
     @Test
     void broadcast() {

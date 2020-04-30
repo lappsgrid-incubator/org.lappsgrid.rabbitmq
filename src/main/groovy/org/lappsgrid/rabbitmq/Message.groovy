@@ -8,10 +8,10 @@ package org.lappsgrid.rabbitmq
  * The <code>route</code> field is used by the framework to determine the next
  * mailbox (RabbitMQ message queue) the message will be sent to.
  */
-class Message {
+class Message<T> {
     String id
     String command
-    Object body
+    T body
     List<String> route
     Map<String,String> parameters
 
@@ -19,24 +19,24 @@ class Message {
         id = UUID.randomUUID().toString()
         command = ''
         route = []
-        body = ''
+        body = null
         parameters = [:]
     }
 
-    Message(String command, Object body, String... route) {
+    Message(String command, T body, String... route) {
         this(command, body, [:], route.toList())
     }
 
-    Message(String command, Object body, Map<String,String> parameters, String... route) {
+    Message(String command, T body, Map<String,String> parameters, String... route) {
         this(command, body, route.toList())
         this.parameters = parameters
     }
 
-    Message(String command, Object body, List<String> route) {
+    Message(String command, T body, List<String> route) {
         this(command, body, [:], route)
     }
 
-    Message(String command, Object body, Map<String, String> parameters, List<String> route) {
+    Message(String command, T body, Map<String, String> parameters, List<String> route) {
         this.id = UUID.randomUUID().toString()
         this.command = command
         this.body = body
@@ -45,7 +45,7 @@ class Message {
     }
 
     Message command(String command) { this.command = command ; this }
-    Message body(Object body)       { this.body = body       ; this }
+    Message body(T body)       { this.body = body       ; this }
     Message route(String route)     { this.route.add(route)  ; this}
     Message route(String... route) {
         route.each { this.route.add(it) }

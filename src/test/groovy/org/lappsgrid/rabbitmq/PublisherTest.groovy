@@ -1,6 +1,7 @@
 package org.lappsgrid.rabbitmq
 
 import com.rabbitmq.client.Consumer
+import org.junit.BeforeClass
 import org.junit.Test
 import org.lappsgrid.rabbitmq.pubsub.Publisher
 import org.lappsgrid.rabbitmq.pubsub.Subscriber
@@ -9,13 +10,22 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicLong
 
-import static org.junit.Assert.*
+import static org.junit.Assert.fail
 
 /**
  *
  */
+//@Ignore
 class PublisherTest {
     static final String exchange = 'test.broadcast'
+
+    @BeforeClass
+    public static void before() {
+        System.setProperty("RABBIT_HOST", "localhost")
+        System.setProperty("RABBIT_USERNAME", "guest")
+        System.setProperty("RABBIT_PASSWORD", "guest")
+        System.setProperty("RABBIT_EXCHANGE", "askme_dev")
+    }
 
     @Test
     void simple() {
@@ -62,32 +72,30 @@ class PublisherTest {
         // Used to count the total number of messages received.
         CountDownLatch latch = new CountDownLatch(n * m)
         // Used to wait for the subscriber threads to start.
-        CountDownLatch ready = new CountDownLatch(n)
+//        CountDownLatch ready = new CountDownLatch(n)
         List<Subscriber> subscribers = []
-        // Start three subscribers.
+        // Start N subscribers.
         n.times { i ->
-            Thread.start {
-                println "Starting subscriber $i"
-                Subscriber subscriber = new Subscriber(exchange)
-                subscribers.add(subscriber)
-                subscriber.register { msg ->
-                    latch.countDown()
-                    println "Listener $i -> $msg"
-                }
-                ready.countDown()
+            println "Starting subscriber $i"
+            Subscriber subscriber = new Subscriber(exchange)
+            subscribers.add(subscriber)
+            subscriber.register { msg ->
+                println "Listener $i -> $msg"
+                latch.countDown()
             }
-
+//            ready.countDown()
         }
 
         // Wait for the above threads to finish starting before starting the publisher.
-        boolean readyWait = ready.await(5, TimeUnit.SECONDS)
-        if (!readyWait) {
-            fail "There was a problem starting the subscribers."
-        }
+//        boolean readyWait = ready.await(5, TimeUnit.SECONDS)
+//        if (!readyWait) {
+//            fail "There was a problem starting the subscribers."
+//        }
 
         // Broadcast five messages.
         Publisher broadcaster = new Publisher(exchange)
         m.times { i ->
+            println "Broadcasting message $i"
             broadcaster.publish("$i PublisherTest#closure()")
             sleep(100)
         }

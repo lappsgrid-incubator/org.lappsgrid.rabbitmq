@@ -16,15 +16,24 @@ class Publisher {
     Channel channel
 
     public Publisher(String exchange) {
-        this(exchange, RabbitMQ.DEFAULT_HOST)
+        this(exchange, RabbitMQ.getHost())
     }
 
     public Publisher(String exchange, String host) {
         this.exchange = exchange
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost(host);
-        factory.setUsername('eager')
-        factory.setPassword('eager')
+        int slash = host.indexOf('/')
+        if (slash < 0) {
+            factory.setHost(host);
+        }
+        else {
+            String addr = host.substring(0, slash)
+            String vhost = host.substring(slash+1)
+            factory.setHost(addr)
+            factory.setVirtualHost(vhost)
+        }
+        factory.setUsername(RabbitMQ.getUsername())
+        factory.setPassword(RabbitMQ.getPassword())
 
         connection = factory.newConnection();
         channel = connection.createChannel();

@@ -9,9 +9,30 @@ import java.util.concurrent.atomic.AtomicInteger
 /**
  *
  */
+//@Ignore
 class MessageQueueTest {
 
     TaskQueue queue
+
+    @BeforeClass
+    public static void before() {
+//        File ini = new File("/etc/lapps/askme-dev.ini")
+//        if (ini.exists()) {
+//            ini.eachLine { String line ->
+//                if (!line.startsWith("#") && line.length() > 3) {
+//                    String[] tokens = line.split('=')
+//                    if (tokens.length == 2) {
+//                        System.setProperty(tokens[0], tokens[1])
+//                    }
+//                }
+//            }
+//        }
+        System.setProperty("RABBIT_HOST", "localhost")
+        System.setProperty("RABBIT_USERNAME", "guest")
+        System.setProperty("RABBIT_PASSWORD", "guest")
+        System.setProperty("RABBIT_EXCHANGE", "askme_dev")
+
+    }
 
     @Before
     void setup() {
@@ -27,15 +48,14 @@ class MessageQueueTest {
     @Test
     void simple() {
         int n = 0
-//        TaskQueue q = new TaskQueue('test.queue')
         queue.register { String message ->
             println "Received: $message"
             ++n
         }
-
-        queue.send('hello world')
-        sleep(500)
-        assert 1 == n
+        queue.send("1. hello world")
+        queue.send("2. hello world")
+        sleep(1000)
+        assert 2 == n
     }
 
     @Test
