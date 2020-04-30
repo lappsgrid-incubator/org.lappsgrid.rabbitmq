@@ -34,8 +34,8 @@ public class RabbitMQ {
     public RabbitMQ(String queueName, String host) throws IOException, TimeoutException
     {
         String username = get(USERNAME_PROPERTY);
-        String passord = get(PASSWORD_PROPERTY);
-        init(queueName, host, username, passord);
+        String password = get(PASSWORD_PROPERTY);
+        init(queueName, host, username, password);
     }
 
     public RabbitMQ(String queueName, String host, String username, String password) throws IOException, TimeoutException
