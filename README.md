@@ -9,7 +9,7 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.lappsgrid/rabbitmq/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/org.lappsgrid/rabbitmq)
 
 
-[RabbitMQ](https://www.rabbitmq.com) is a lightweight, easy to use, open source message broker that can be used to send messages between processes even when those processes are running in different JVMs, on different machines, or possibly even in different json-centers.  Above all, RabbitMQ is dead simple to get up and running and start using. Zero configuration is required to create exchanges and message queues, they will be created and destroyed automatically on demand by the RabbitMQ server.
+[RabbitMQ](https://www.rabbitmq.com) is a lightweight, easy to use, open source message broker that can be used to send messages between processes even when those processes are running in different JVMs, on different machines, or possibly even in different data-centers.  Above all, RabbitMQ is dead simple to get up and running and start using. Zero configuration is required to create exchanges and message queues, they will be created and destroyed automatically on demand by the RabbitMQ server.
 
 The `org.lappsgrid.rabbitmq` module provides a simplified API for a subset of the RabbitMQ features.  Namely:
 
