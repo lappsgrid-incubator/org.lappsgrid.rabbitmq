@@ -21,13 +21,13 @@ class Broadcaster {
     }
 
     Broadcaster(String exchange) {
-        this(exchange, 'eager', 'eager')
+        this(exchange, RabbitMQ.getUsername(), RabbitMQ.getPassword())
     }
 
     Broadcaster(String exchange, String user, String password) {
         this.exchange = exchange
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost(RabbitMQ.DEFAULT_HOST);
+        factory.setHost(RabbitMQ.getHost());
         factory.setUsername(user)
         factory.setPassword(password)
 

@@ -26,9 +26,9 @@ class Listener {
     Listener(String exchange) {
         this.exchange = exchange
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost(RabbitMQ.DEFAULT_HOST);
-        factory.setUsername('eager')
-        factory.setPassword('eager')
+        factory.setHost(RabbitMQ.getHost());
+        factory.setUsername(RabbitMQ.getUsername())
+        factory.setPassword(RabbitMQ.getPassword())
 
         connection = factory.newConnection();
         channel = connection.createChannel();

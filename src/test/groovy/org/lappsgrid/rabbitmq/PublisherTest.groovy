@@ -16,23 +16,28 @@ import static org.junit.Assert.*
 /**
  *
  */
-@Ignore
+//@Ignore
 class PublisherTest {
     static final String exchange = 'test.broadcast'
 
     @BeforeClass
     public static void before() {
-        File ini = new File("/etc/lapps/askme-dev.ini")
-        if (ini.exists()) {
-            ini.eachLine { String line ->
-                if (!line.startsWith("#") && line.length() > 3) {
-                    String[] tokens = line.split('=')
-                    if (tokens.length == 2) {
-                        System.setProperty(tokens[0], tokens[1])
-                    }
-                }
-            }
-        }
+//        File ini = new File("/etc/lapps/askme-dev.ini")
+//        if (ini.exists()) {
+//            ini.eachLine { String line ->
+//                if (!line.startsWith("#") && line.length() > 3) {
+//                    String[] tokens = line.split('=')
+//                    if (tokens.length == 2) {
+//                        System.setProperty(tokens[0], tokens[1])
+//                    }
+//                }
+//            }
+//        }
+        System.setProperty("RABBIT_HOST", "localhost")
+        System.setProperty("RABBIT_USERNAME", "guest")
+        System.setProperty("RABBIT_PASSWORD", "guest")
+        System.setProperty("RABBIT_EXCHANGE", "askme_dev")
+
     }
 
     @Test
