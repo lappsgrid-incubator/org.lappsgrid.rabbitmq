@@ -5,7 +5,6 @@ import com.rabbitmq.client.Consumer
 import com.rabbitmq.client.DefaultConsumer
 import com.rabbitmq.client.Envelope
 import org.junit.BeforeClass
-import org.junit.Ignore
 import org.junit.Test
 import org.lappsgrid.rabbitmq.pubsub.Broadcaster
 import org.lappsgrid.rabbitmq.pubsub.Listener

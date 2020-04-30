@@ -1,18 +1,14 @@
 package org.lappsgrid.rabbitmq;
 
-import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.Consumer;
-import com.rabbitmq.client.DefaultConsumer;
-import com.rabbitmq.client.Envelope;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 /**
- *
+ * A base class that handles RabbitMQ connections, channels, exchanges, and queues.
  */
 public class RabbitMQ {
     public static final String DEFAULT_HOST = "rabbitmq.lappsgrid.org";
@@ -79,38 +75,18 @@ public class RabbitMQ {
     static String getProperty(String key, String defaultValue) {
         String value = System.getProperty(key);
         if (value != null) {
-            System.out.println("Found system property for " + key + " = " + value);
+//            System.out.println("Found system property for " + key + " = " + value);
             return value;
         }
         value = System.getenv(key);
         if (value != null) {
-            System.out.println("Found environment variable for " + key + " = " + value);
+//            System.out.println("Found environment variable for " + key + " = " + value);
             return value;
         }
-        System.out.println("Using default value for " + key + " = " + defaultValue);
+//        System.out.println("Using default value for " + key + " = " + defaultValue);
         return defaultValue;
     }
-    /*
-    void register(Consumer consumer) {
-        channel.basicConsume(queueName, false, consumer)
-    }
 
-    void register(Closure cl) {
-        Consumer consumer = new DefaultConsumer(channel) {
-            @Override
-            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
-                    throws IOException {
-                String message = new String(body, "UTF-8");
-                cl(message)
-                if (ack) {
-                    println "ack ${envelope.deliveryTag}"
-                    channel.basicAck(envelope.deliveryTag, false)
-                }
-            }
-        }
-        register(consumer)
-    }
-    */
     public void close() throws IOException, TimeoutException
     {
         if (channel.isOpen()) {

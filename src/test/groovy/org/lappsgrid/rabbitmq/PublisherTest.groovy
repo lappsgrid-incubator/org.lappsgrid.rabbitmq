@@ -2,7 +2,6 @@ package org.lappsgrid.rabbitmq
 
 import com.rabbitmq.client.Consumer
 import org.junit.BeforeClass
-import org.junit.Ignore
 import org.junit.Test
 import org.lappsgrid.rabbitmq.pubsub.Publisher
 import org.lappsgrid.rabbitmq.pubsub.Subscriber
@@ -11,7 +10,7 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicLong
 
-import static org.junit.Assert.*
+import static org.junit.Assert.fail
 
 /**
  *
@@ -22,22 +21,10 @@ class PublisherTest {
 
     @BeforeClass
     public static void before() {
-//        File ini = new File("/etc/lapps/askme-dev.ini")
-//        if (ini.exists()) {
-//            ini.eachLine { String line ->
-//                if (!line.startsWith("#") && line.length() > 3) {
-//                    String[] tokens = line.split('=')
-//                    if (tokens.length == 2) {
-//                        System.setProperty(tokens[0], tokens[1])
-//                    }
-//                }
-//            }
-//        }
         System.setProperty("RABBIT_HOST", "localhost")
         System.setProperty("RABBIT_USERNAME", "guest")
         System.setProperty("RABBIT_PASSWORD", "guest")
         System.setProperty("RABBIT_EXCHANGE", "askme_dev")
-
     }
 
     @Test
@@ -87,7 +74,7 @@ class PublisherTest {
         // Used to wait for the subscriber threads to start.
 //        CountDownLatch ready = new CountDownLatch(n)
         List<Subscriber> subscribers = []
-        // Start three subscribers.
+        // Start N subscribers.
         n.times { i ->
             println "Starting subscriber $i"
             Subscriber subscriber = new Subscriber(exchange)
