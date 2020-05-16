@@ -11,37 +11,47 @@ import java.util.concurrent.TimeoutException;
  * A base class that handles RabbitMQ connections, channels, exchanges, and queues.
  */
 public class RabbitMQ {
-    public static final String DEFAULT_HOST = "rabbitmq.lappsgrid.org";
-//    public static final String DEFAULT_HOST = "localhost"
+    static class Context {
+        public static String host = "localhost";
+        public static String username = "guest";
+        public static String password = "guest";
+    }
 
+    public static final String HOST_PROPERTY = "RABBIT_HOST";
     public static final String USERNAME_PROPERTY = "RABBIT_USERNAME";
     public static final String PASSWORD_PROPERTY = "RABBIT_PASSWORD";
 
     public String queueName;
-    public String exchange;
+//    public final String exchange;
     public Connection connection;
     public Channel channel;
 
     public RabbitMQ(String queueName) throws IOException, TimeoutException
     {
-        this(queueName, DEFAULT_HOST);
+        this.queueName = queueName;
+        configure();
+        connect();
     }
 
     public RabbitMQ(String queueName, String host) throws IOException, TimeoutException
     {
-        String username = get(USERNAME_PROPERTY);
-        String password = get(PASSWORD_PROPERTY);
-        init(queueName, host, username, password);
+        this.queueName = queueName;
+        configure();
+        Context.host = host;
+        connect();
     }
 
-    public RabbitMQ(String queueName, String host, String username, String password) throws IOException, TimeoutException
-    {
-        init(queueName, host, username, password);
+    public RabbitMQ(String queueName, String address, String username, String password) throws IOException, TimeoutException {
+        this.queueName = queueName;
+        Context.host = address;
+        Context.username = username;
+        Context.password = password;
+        connect();
     }
 
-    private void init(String queueName, String host, String username, String password) throws IOException, TimeoutException
-    {
+    private void connect() throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
+        String host = Context.host;
         String vhost = "/";
         int slash = host.indexOf("/");
         if (slash > 0) {
@@ -50,11 +60,22 @@ public class RabbitMQ {
         }
         factory.setHost(host);
         factory.setVirtualHost(vhost);
-        factory.setUsername(username);
-        factory.setPassword(password);
+        factory.setUsername(Context.username);
+        factory.setPassword(Context.password);
         connection = factory.newConnection();
         channel = connection.createChannel();
-        this.queueName = queueName;
+    }
+
+    public static void configure(String host, String username, String password) {
+        Context.host = host;
+        Context.username = username;
+        Context.password = password;
+    }
+
+    private void configure() {
+        Context.host = getProperty(HOST_PROPERTY, Context.host);
+        Context.username = getProperty(USERNAME_PROPERTY, Context.username);
+        Context.password = getProperty(PASSWORD_PROPERTY, Context.password);
     }
 
     private String get(String name) {
@@ -62,28 +83,24 @@ public class RabbitMQ {
     }
 
     public static String getHost() {
-        return getProperty("RABBIT_HOST", DEFAULT_HOST);
+        return getProperty("RABBIT_HOST", Context.host);
     }
-
     public static String getUsername() {
-        return getProperty("RABBIT_USERNAME", "rabbit");
+        return getProperty("RABBIT_USERNAME", Context.username);
     }
     public static String getPassword() {
-        return getProperty("RABBIT_PASSWORD", "rabbit");
+        return getProperty("RABBIT_PASSWORD", Context.password);
     }
 
     static String getProperty(String key, String defaultValue) {
         String value = System.getProperty(key);
         if (value != null) {
-//            System.out.println("Found system property for " + key + " = " + value);
             return value;
         }
         value = System.getenv(key);
         if (value != null) {
-//            System.out.println("Found environment variable for " + key + " = " + value);
             return value;
         }
-//        System.out.println("Using default value for " + key + " = " + defaultValue);
         return defaultValue;
     }
 
@@ -92,8 +109,10 @@ public class RabbitMQ {
         if (channel.isOpen()) {
             channel.close();
         }
+        channel = null;
         if (connection.isOpen()) {
             connection.close();
         }
+        connection = null;
     }
 }

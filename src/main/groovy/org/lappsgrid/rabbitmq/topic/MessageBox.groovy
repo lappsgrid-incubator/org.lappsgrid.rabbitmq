@@ -12,8 +12,8 @@ import org.lappsgrid.serialization.Serializer
 /**
  *
  */
-abstract class MessageBox extends RabbitMQ {
-    String exchange
+abstract class MessageBox<T> extends RabbitMQ {
+//    String exchange
 
     MessageBox(String exchange, String address) {
         this(exchange, address, RabbitMQ.getHost())
@@ -31,12 +31,12 @@ abstract class MessageBox extends RabbitMQ {
         this.channel.basicConsume(queueName, false, new MessageBoxConsumer(this))
     }
 
-    abstract void recv(Message message)
+    abstract void recv(Message<T> message)
 
-    class MessageBoxConsumer extends DefaultConsumer {
-        MessageBox box
+    class MessageBoxConsumer<T> extends DefaultConsumer {
+        MessageBox<T> box
 
-        MessageBoxConsumer(MessageBox box) {
+        MessageBoxConsumer(MessageBox<T> box) {
             super(box.channel)
             this.box = box;
         }

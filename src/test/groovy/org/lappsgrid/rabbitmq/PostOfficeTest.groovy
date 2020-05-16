@@ -25,15 +25,15 @@ class PostOfficeTest {
 //                }
 //            }
 //        }
-        System.setProperty("RABBIT_HOST", "localhost")
-        System.setProperty("RABBIT_USERNAME", "guest")
-        System.setProperty("RABBIT_PASSWORD", "guest")
-        System.setProperty("RABBIT_EXCHANGE", "askme_dev")
-
+//        System.setProperty("RABBIT_HOST", "localhost")
+//        System.setProperty("RABBIT_USERNAME", "guest")
+//        System.setProperty("RABBIT_PASSWORD", "guest")
+//        System.setProperty("RABBIT_EXCHANGE", "askme_dev")
+//        RabbitMQ.configure("localhost", "guest", "guest")
     }
     @Test
     void sendMail() {
-        println "Host is ${RabbitMQ.host}"
+        println "Host is ${RabbitMQ.Context.host}"
         int c1 = 0
         int c2 = 0
         MailBox box1 = new MailBox('test.postoffice', 'box1') {
