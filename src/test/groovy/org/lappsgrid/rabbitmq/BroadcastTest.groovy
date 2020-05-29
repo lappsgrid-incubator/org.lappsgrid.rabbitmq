@@ -5,6 +5,7 @@ import com.rabbitmq.client.Consumer
 import com.rabbitmq.client.DefaultConsumer
 import com.rabbitmq.client.Envelope
 import org.junit.BeforeClass
+import org.junit.Ignore
 import org.junit.Test
 import org.lappsgrid.rabbitmq.pubsub.Broadcaster
 import org.lappsgrid.rabbitmq.pubsub.Listener
@@ -14,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger
 /**
  *
  */
-//@Ignore
+@Ignore
 class BroadcastTest {
     public static final String exchange = 'test.public.broadcast'
 

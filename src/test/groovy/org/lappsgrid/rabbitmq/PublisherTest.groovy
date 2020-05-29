@@ -2,6 +2,7 @@ package org.lappsgrid.rabbitmq
 
 import com.rabbitmq.client.Consumer
 import org.junit.BeforeClass
+import org.junit.Ignore
 import org.junit.Test
 import org.lappsgrid.rabbitmq.pubsub.Publisher
 import org.lappsgrid.rabbitmq.pubsub.Subscriber
@@ -15,7 +16,7 @@ import static org.junit.Assert.fail
 /**
  *
  */
-//@Ignore
+@Ignore
 class PublisherTest {
     static final String exchange = 'test.broadcast'
 
