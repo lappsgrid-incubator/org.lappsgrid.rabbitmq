@@ -55,4 +55,13 @@ class Message<T> {
     String get(String key) {
         return parameters[key]
     }
+
+    /**
+     * Does this message have somewhere to go?
+     *
+     * @return true if route[] is not null and contains at least one entry.
+     */
+    boolean routable() {
+        return route != null && route.size() > 0
+    }
 }
