@@ -11,7 +11,7 @@ import org.lappsgrid.rabbitmq.SimpleConsumer
 class TaskQueue extends RabbitMQ {
 
     public TaskQueue(String name) {
-        this(name, RabbitMQ.getHost() , true, true)
+        this(name, RabbitMQ.Context.host , true, true)
     }
 
     public TaskQueue(String name, String host) {
@@ -25,7 +25,7 @@ class TaskQueue extends RabbitMQ {
             channel.basicQos(1)
         }
         boolean exclusive = false
-        boolean autoDelete = false
+        boolean autoDelete = true
         channel.queueDeclare(name, durable, exclusive, autoDelete, null);
     }
 

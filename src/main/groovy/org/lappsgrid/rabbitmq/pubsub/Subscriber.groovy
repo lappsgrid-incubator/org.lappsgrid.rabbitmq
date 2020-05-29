@@ -20,7 +20,6 @@ class Subscriber {
 
     Subscriber(String exchange) {
         this(exchange, RabbitMQ.getHost())
-
     }
 
     Subscriber(String exchange, String host) {

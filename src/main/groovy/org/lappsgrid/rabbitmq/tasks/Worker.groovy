@@ -15,13 +15,20 @@ abstract class Worker extends DefaultConsumer {
     protected boolean autoclose = false
 
     Worker(String name) {
-        this(new TaskQueue(name, RabbitMQ.getHost()))
+        this(new TaskQueue(name, RabbitMQ.Context.host))
         autoclose = true
     }
+    /**
+     * TODO: This constructor is likely wonky... if the provided parameter is not the same
+     * as RabbitMQ.Context.host then the behaviour is undefined.
+     *
+     */
+    @Deprecated
     Worker(String name, String host) {
         this(new TaskQueue(name, host))
         autoclose = true
     }
+    
     Worker(TaskQueue queue) {
         super(queue.channel)
         queue.register(this)
