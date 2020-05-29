@@ -1,5 +1,6 @@
 package org.lappsgrid.rabbitmq;
 
+import com.rabbitmq.client.AlreadyClosedException;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -106,13 +107,20 @@ public class RabbitMQ {
 
     public void close() throws IOException, TimeoutException
     {
-        if (channel.isOpen()) {
-            channel.close();
+        try {
+            if (channel.isOpen()) {
+                channel.close();
+            }
+            if (connection.isOpen()) {
+                connection.close();
+            }
+        }
+        catch (AlreadyClosedException ignored) {
+            // If the channel/connection has already been closed then:
+            // 1. Why is isOpen() returning true, and
+            // 2. It should be safe to ignore this exception.
         }
         channel = null;
-        if (connection.isOpen()) {
-            connection.close();
-        }
         connection = null;
     }
 }
